@@ -3,13 +3,15 @@ import os
 import json
 import time #API를 너무 빨리 호출하면 에러발생 -> sleep 필요
 from tqdm import tqdm
+import shutil 
 
 API_KEY = os.getenv('MOVIE_API_KEY')
+
 
 def save_json(data, file_path):
     os.makedirs(os.path.dirname(file_path), exist_ok=True)
     # exist_okf=True 디렉토리가 있으면 skip하는 옵션
-    with open(file_path, "w", encoding='utf8') as f:
+    with open(file_path, "w", encoding='utf-8') as f:
         json.dump(data, f, indent=4, ensure_ascii=False)
     pass
 
@@ -20,7 +22,7 @@ def req(url):
     return j
 
 def save_movies(year, per_page=10, sleep_time=1):
-    file_path = f'data/movies/year={year}/data.json'
+    file_path = f'/home/hahahellooo/data/movies/year={year}/data.json'
 
 
     # 위 경로가 있으면 API 호출을 멈추고  프로그램 종료
