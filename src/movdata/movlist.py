@@ -21,9 +21,13 @@ def req(url):
     j = r.json()
     return j
 
-def save_movies(year, per_page=10, sleep_time=1):
+def save_movies(start_year=2015, end_year=2024, per_page=10, sleep_time=1):
     file_path = f'/home/hahahellooo/data/movies/year={year}/data.json'
-
+    for year in range(start_year, end_year+1):
+        if os.exists(file_path):
+            print(f"데이터가 이미 존재합니다: {file_path}")
+        else:
+            pass
 
     # 위 경로가 있으면 API 호출을 멈추고  프로그램 종료
     # totCnt  가져오고 total_pages 계산
