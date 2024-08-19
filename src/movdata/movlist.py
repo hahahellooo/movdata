@@ -30,9 +30,9 @@ def save_movies(start_year=2015, end_year=2024, per_page=10, sleep_time=1):
             print(f"데이터가 이미 존재합니다: {file_path}")
             continue
         else:
-            l = req(r)
+            j = req(r)
     # totCnt  가져오고 total_pages 계산
-            tot_cnt = l['movieListResult']['totCnt']
+            tot_cnt = j['movieListResult']['totCnt']
             total_pages = (tot_cnt // per_page) + 1
     # total_pages 만큼 loop 돌면서 API 호출
             all_data=[]
