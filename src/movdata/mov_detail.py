@@ -10,7 +10,7 @@ home_path=os.path.expanduser('~')
 
 def load_movie_list(year):
     load_path = f'{home_path}/code/movdata/data/movies/year={year}/data.json'
-    with open(load_path, "w", encoding='utf-8') as f:
+    with open(load_path, "r", encoding='utf-8') as f:
               load_data = json.load(f)
     return load_data
 
@@ -23,11 +23,11 @@ def make_detail_list(year):
     for ddata in tqdm(load_data):
         movieCd = ddata['movieCd']
         # movieCd 데이터 추출
-        detail_data = get_detail_data(movieCd)
-        all_detail_data.append(detail_data)
+        req_data = get_detail_data(movieCd)
+        all_detail_data.append(req_data)
         # 추출한 데이터 저장
-        save_detail_list(year, all_detail_data)
-        return True
+    save_detail_list(year, all_detail_data)
+    return True
 
 def save_detail_list(year, all_detail_data):
 
@@ -35,13 +35,13 @@ def save_detail_list(year, all_detail_data):
     file_path=f'{home_path}/code/movdata/data/movies_detail/year={year}/data.json'
     # 경로에 디렉토리 없으면 생성한 후 json으로 저장
     os.makedirs(os.path.dirname(file_path), exist_ok=True)
-    with open(file_path, "2", encoding='utf-8') as f:
-        json.dump(all_detial_dat, f, indent=4, ensure_ascii=False)
+    with open(file_path, "w", encoding='utf-8') as f:
+        json.dump(all_detial_data, f, indent=4, ensure_ascii=False)
 
 def get_detail_data(movieCd):
     # API 호출해서 movieCd 데이터를 가져옴
     url_base = f"http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?key={MOVIE_API_KEY}"
-    r = url_base + "&movieCd={movieCd}"
+    r = f'{url_base}&movieCd={movieCd}'
     # movieCd 데이터 sjon으로 추출
     req_data = requests.get(r).json()
     return req_data
