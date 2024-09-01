@@ -3,7 +3,6 @@ import os
 import json
 import time #API를 너무 빨리 호출하면 에러발생 -> sleep 필요
 from tqdm import tqdm
-import shutil 
 
 API_KEY = os.getenv('MOVIE_API_KEY')
 home_path = os.path.expanduser('~')
