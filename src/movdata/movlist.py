@@ -6,7 +6,7 @@ from tqdm import tqdm
 import shutil 
 
 API_KEY = os.getenv('MOVIE_API_KEY')
-
+home_path = os.path.expanduser('~')
 
 def save_json(data, file_path):
     os.makedirs(os.path.dirname(file_path), exist_ok=True)
@@ -23,7 +23,7 @@ def req(url):
 def save_movies(start_year=2014, end_year=2024, per_page=10, sleep_time=1):
     # 위 경로가 있으면 API 호출을 멈추고  프로그램 종료
     for year in range(start_year, end_year+1):
-        file_path = f'/home/hahahellooo/data/movies/year={year}/data.json'
+        file_path = f'{home_path}/code/movdata/data/movies/year={year}/data.json'
         url_base = f"https://kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key={API_KEY}&openStartDt={year}&openEndDt={year}"
         r = url_base + "&curPage=1"
         if os.path.exists(file_path):
