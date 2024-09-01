@@ -20,7 +20,7 @@ def req(url):
     j = r.json()
     return j
 
-def save_movies(start_year=2015, end_year=2024, per_page=10, sleep_time=1):
+def save_movies(start_year=2014, end_year=2024, per_page=10, sleep_time=1):
     # 위 경로가 있으면 API 호출을 멈추고  프로그램 종료
     for year in range(start_year, end_year+1):
         file_path = f'/home/hahahellooo/data/movies/year={year}/data.json'
