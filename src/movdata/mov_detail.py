@@ -11,13 +11,18 @@ home_path=os.path.expanduser('~')
 def load_movie_list(year):
     load_path = f'{home_path}/code/movdata/data/movies/year={year}/data.json'
     with open(load_path, "r", encoding='utf-8') as f:
-              load_data = json.load(f)
+        load_data = json.load(f)
     return load_data
 
 def make_detail_list(year):
 
     # json 데이터 읽어오기
     load_data = load_movie_list(year)
+    file_path=f'{home_path}/code/movdata/data/movies_detail/year={year}/data.json'
+    if os.path.exists(file_path):
+        print(f'데이터가 이미 존재합니다: {file_path}')
+        return True
+        
     # for문 돌면서 detail_data 가져오기
     all_detail_data = []
     for ddata in tqdm(load_data):
